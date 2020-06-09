@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'home_controller.dart';
 
@@ -19,9 +20,33 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[],
-      ),
+      body: Observer(builder: (_) {
+        if (controller.cursos.error != null) {
+          return Center(
+            child: RaisedButton(
+              onPressed: () {
+                controller.fetchCursos();
+              },
+              child: Text('Repetir'),
+            ),
+          );
+        }
+
+        if (controller.cursos.value == null) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        var list = controller.cursos.value;
+        return ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text(list[index].nome),
+            );
+          },
+        );
+      }),
     );
   }
 }
