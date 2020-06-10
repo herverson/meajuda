@@ -24,6 +24,6 @@ URLS da API
 ## Screenshots
 
 <row>
-  <column><img align="left" width="300" height="600" src="https://github.com/herverson/meajuda/blob/master/Screenshot/1.jpg"></column>
-  <column><img align="left" width="300" height="600" src="https://github.com/herverson/meajuda/blob/master/Screenshot/2.jpg"></column>
+  <column><img align="left" width="300" height="600" src="https://github.com/herverson/meajuda/blob/master/Screenshots/1.jpg"></column>
+  <column><img align="left" width="300" height="600" src="https://github.com/herverson/meajuda/blob/master/Screenshots/2.jpg"></column>
 </row>
