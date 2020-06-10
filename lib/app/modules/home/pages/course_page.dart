@@ -28,14 +28,14 @@ class DetailPage extends StatelessWidget {
                         Text(
                           curso.nome,
                           style: GoogleFonts.montserrat(
-                            fontSize: 56,
+                            fontSize: 50,
                             color: primaryTextColor,
                             fontWeight: FontWeight.w900,
                           ),
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          'Exatas',
+                          'Quantidade de semestre ${curso.qtdSesmestres}',
                           style: GoogleFonts.montserrat(
                             fontSize: 31,
                             color: primaryTextColor,
@@ -73,36 +73,21 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 250,
-                    padding: const EdgeInsets.only(left: 32.0),
-                    child: ListView.builder(
-                      itemCount: curso.disciplinas.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          clipBehavior: Clip.antiAlias,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
+                      padding: const EdgeInsets.only(left: 22.0),
+                      child: Wrap(
+                        spacing: 0.0, // gap between adjacent chips
+                        runSpacing: 0.0, // gap between lines
+                        children: List.generate(
+                          curso.disciplinas.length,
+                          (index) => chipDesign(
+                            curso.disciplinas[index].nome,
+                            Color(0xFFE4979E),
                           ),
-                          child: AspectRatio(
-                            aspectRatio: 1,
-                            child: Image.network(
-                              // curso.images[index],
-                              'https://image.shutterstock.com/image-photo/solar-system-venus-second-planet-600w-515581927.jpg',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                        ),
+                      )),
                 ],
               ),
             ),
-            // Positioned(
-            //   right: -64,
-            //   child: Image.network(''),
-            // ),
             Positioned(
               top: 60,
               left: 32,
@@ -127,4 +112,20 @@ class DetailPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget chipDesign(String label, Color color) => Container(
+        child: Chip(
+          label: Text(
+            label,
+            style: GoogleFonts.ubuntu(
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: color,
+          elevation: 4,
+          shadowColor: Colors.grey[50],
+          padding: EdgeInsets.all(4),
+        ),
+        margin: EdgeInsets.only(left: 12, right: 12, top: 2, bottom: 2),
+      );
 }

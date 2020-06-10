@@ -1,3 +1,4 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -25,11 +26,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       backgroundColor: gradientEndColor,
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [gradientStartColor, gradientEndColor],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.3, 0.7])),
+          gradient: LinearGradient(
+            colors: [gradientStartColor, gradientEndColor],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.3, 0.7],
+          ),
+        ),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -99,19 +102,15 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(
                         builder: DotSwiperPaginationBuilder(
-                            activeSize: 20, space: 8),
+                          activeSize: 20,
+                          space: 8,
+                        ),
                       ),
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, a, b) => DetailPage(
-                                  curso: cursos[index],
-                                ),
-                              ),
-                            );
+                            Modular.to
+                                .pushNamed('/curso', arguments: cursos[index]);
                           },
                           child: Stack(
                             children: <Widget>[
@@ -176,11 +175,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                   ],
                                 ),
                               ),
-                              // Hero(
-                              //   tag: cursos[index].id,
-                              //   child: Image.network(
-                              //       "https://assets-ouch.icons8.com/thumb/428/88b57de6-38b6-4086-887e-93f181f27ec7.png"),
-                              // ),
                               Positioned(
                                 right: 24,
                                 bottom: 60,
@@ -206,29 +200,34 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(36.0),
-          ),
-          color: navigationColor,
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(26.0),
+          topLeft: Radius.circular(26.0),
         ),
-        padding: const EdgeInsets.all(4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Ionicons.md_apps),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Ionicons.ios_search),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Feather.user),
-              onPressed: () {},
-            ),
+        child: BottomNavyBar(
+          backgroundColor: navigationColor,
+          selectedIndex: _currentIndex,
+          showElevation: false, // use this to remove appBar's elevation
+          onItemSelected: (index) => setState(() {
+            _currentIndex = index;
+          }),
+          items: [
+            BottomNavyBarItem(
+                icon: Icon(MaterialCommunityIcons.view_grid),
+                title: Text('Início'),
+                inactiveColor: Colors.black,
+                activeColor: Colors.white),
+            BottomNavyBarItem(
+                icon: Icon(Ionicons.ios_search),
+                title: Text('Pesquisar'),
+                inactiveColor: Colors.black,
+                activeColor: Colors.white),
+            BottomNavyBarItem(
+                icon: Icon(Feather.user),
+                inactiveColor: Colors.black,
+                title: Text('Usuário'),
+                activeColor: Colors.white),
           ],
         ),
       ),

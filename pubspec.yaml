@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  bottom_navy_bar: ^5.4.0
   flutter_vector_icons: ^0.2.1
   flutter_swiper: ^1.1.6
   google_fonts: ^1.1.0

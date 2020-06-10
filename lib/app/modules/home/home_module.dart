@@ -3,6 +3,7 @@ import 'package:meajuda/app/modules/home/home_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:meajuda/app/modules/home/home_page.dart';
 
+import 'pages/course_page.dart';
 import 'shared/repositories/curso_repository.dart';
 import 'shared/utils/constants.dart';
 
@@ -17,6 +18,7 @@ class HomeModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => HomePage()),
+        Router('/curso', child: (_, args) => DetailPage(curso: args.data)),
       ];
 
   static Inject get to => Inject<HomeModule>.of();
