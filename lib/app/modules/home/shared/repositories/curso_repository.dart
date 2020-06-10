@@ -9,7 +9,6 @@ class CursoRepository {
   Future<List<Curso>> getAllCursos() async {
     var response = await dio.get('curso/listar');
     List<Curso> cursos = [];
-    print(response.data.toString());
     for (var json in (response.data as List)) {
       Curso curso = Curso.fromJson(json);
       cursos.add(curso);
