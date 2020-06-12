@@ -5,9 +5,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../shared/utils/constants.dart';
 import 'home_controller.dart';
-import 'pages/course_page.dart';
-import 'shared/utils/constants.dart';
 
 class HomePage extends StatefulWidget {
   final String title;

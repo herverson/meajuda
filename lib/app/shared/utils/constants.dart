@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-const String URL_BASE = "https://passei-disciplina.herokuapp.com/api/";
+const String URL_CURSO = "https://passei-disciplina.herokuapp.com/api/";
+const String URL_DOCUM = "https://passei-file.herokuapp.com/api/";
 
 Color primaryTextColor = Color(0xFF414C6B);
 Color secondaryTextColor = Color(0xFFE4979E);

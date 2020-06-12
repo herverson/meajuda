@@ -1,7 +1,9 @@
+import '../../shared/models/documento.dart';
+
+import '../../shared/models/curso.dart';
+import '../../shared/repositories/curso_repository.dart';
 import 'package:mobx/mobx.dart';
 
-import 'shared/models/curso.dart';
-import 'shared/repositories/curso_repository.dart';
 
 part 'home_controller.g.dart';
 
@@ -16,9 +18,17 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   ObservableFuture<List<Curso>> cursos;
+
+  @observable
+  ObservableFuture<List<Documento>> docs;
   
   @action
   fetchCursos() {
     cursos = repository.getAllCursos().asObservable();
+  }
+
+  @action
+  fetchDocs(int id) {
+    docs = repository.getAllDocumentos(id).asObservable();
   }
 }

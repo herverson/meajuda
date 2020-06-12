@@ -24,6 +24,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$docsAtom = Atom(name: '_HomeControllerBase.docs');
+
+  @override
+  ObservableFuture<List<Documento>> get docs {
+    _$docsAtom.reportRead();
+    return super.docs;
+  }
+
+  @override
+  set docs(ObservableFuture<List<Documento>> value) {
+    _$docsAtom.reportWrite(value, super.docs, () {
+      super.docs = value;
+    });
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 
@@ -39,9 +54,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  dynamic fetchDocs(int id) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.fetchDocs');
+    try {
+      return super.fetchDocs(id);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-cursos: ${cursos}
+cursos: ${cursos},
+docs: ${docs}
     ''';
   }
 }

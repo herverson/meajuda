@@ -1,8 +1,8 @@
-import 'package:meajuda/app/app_controller.dart';
+import '../app/app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
-import 'package:meajuda/app/app_widget.dart';
-import 'package:meajuda/app/modules/home/home_module.dart';
+import '../app/app_widget.dart';
+import '../app/modules/home/home_module.dart';
 
 class AppModule extends MainModule {
   @override

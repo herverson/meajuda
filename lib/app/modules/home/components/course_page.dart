@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meajuda/app/modules/home/shared/models/curso.dart';
-import 'package:meajuda/app/modules/home/shared/utils/constants.dart';
+import 'package:meajuda/app/modules/home/home_controller.dart';
+import 'package:meajuda/app/shared/models/disciplina.dart';
+import '../../../shared/models/curso.dart';
+import '../../../shared/utils/constants.dart';
 
 class DetailPage extends StatelessWidget {
   final Curso curso;
@@ -24,7 +27,7 @@ class DetailPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 300),
+                        // SizedBox(height: 300),
                         Text(
                           curso.nome,
                           style: GoogleFonts.montserrat(
@@ -35,7 +38,7 @@ class DetailPage extends StatelessWidget {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          'Quantidade de semestre ${curso.qtdSesmestres}',
+                          'Quantidade de semestres ${curso.qtdSesmestres}',
                           style: GoogleFonts.montserrat(
                             fontSize: 31,
                             color: primaryTextColor,
@@ -82,23 +85,11 @@ class DetailPage extends StatelessWidget {
                           (index) => chipDesign(
                             curso.disciplinas[index].nome,
                             Color(0xFFE4979E),
+                            curso.disciplinas[index],
                           ),
                         ),
                       )),
                 ],
-              ),
-            ),
-            Positioned(
-              top: 60,
-              left: 32,
-              child: Text(
-                curso.id.toString(),
-                style: GoogleFonts.montserrat(
-                  fontSize: 247,
-                  color: primaryTextColor.withOpacity(0.08),
-                  fontWeight: FontWeight.w900,
-                ),
-                textAlign: TextAlign.left,
               ),
             ),
             IconButton(
@@ -113,19 +104,27 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget chipDesign(String label, Color color) => Container(
-        child: Chip(
-          label: Text(
-            label,
-            style: GoogleFonts.ubuntu(
-              color: Colors.white,
+  Widget chipDesign(String label, Color color, Disciplinas disciplinas) =>
+      Container(
+        margin: EdgeInsets.only(right: 4),
+        child: GestureDetector(
+          onTap: () {
+            Modular.get<HomeController>().fetchDocs(disciplinas.id);
+            Modular.to.pushNamed('/disciplina', arguments: disciplinas);
+          },
+          child: Chip(
+            materialTapTargetSize: MaterialTapTargetSize.padded,
+            label: Text(
+              label,
+              style: GoogleFonts.ubuntu(
+                color: Colors.white,
+              ),
             ),
+            backgroundColor: color,
+            elevation: 4,
+            shadowColor: Colors.grey[50],
+            padding: EdgeInsets.all(4),
           ),
-          backgroundColor: color,
-          elevation: 4,
-          shadowColor: Colors.grey[50],
-          padding: EdgeInsets.all(4),
         ),
-        margin: EdgeInsets.only(left: 12, right: 12, top: 2, bottom: 2),
       );
 }
